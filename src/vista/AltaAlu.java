@@ -4,17 +4,33 @@
  */
 package vista;
 
+import controlador.Empresa;
+import javax.swing.DefaultComboBoxModel;
+import modelo.Curso;
+
 /**
  *
  * @author dam
  */
 public class AltaAlu extends javax.swing.JPanel {
 
+    DefaultComboBoxModel modelo;
+    Empresa empresa;
+
     /**
      * Creates new form AltaAlu
      */
-    public AltaAlu() {
+    public AltaAlu(Empresa empresa) {
+        this.empresa = empresa;
         initComponents();
+        modelo = new DefaultComboBoxModel();
+        jcCursos.setModel(modelo);
+        cargarCursos();
+    }
+
+    private void cargarCursos() {
+        modelo.addElement("Seleccione un curso");
+        modelo.addAll(empresa.getCursos());
     }
 
     /**
@@ -42,6 +58,11 @@ public class AltaAlu extends javax.swing.JPanel {
         jLabel3.setText("Curso");
 
         btGuardar.setText("Guardar");
+        btGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGuardarActionPerformed(evt);
+            }
+        });
 
         btCancelar.setText("Cancelar");
 
@@ -104,6 +125,17 @@ public class AltaAlu extends javax.swing.JPanel {
     private void jcCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcCursosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcCursosActionPerformed
+
+    private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
+        int pos = jcCursos.getSelectedIndex();
+        if (!(modelo.getElementAt(pos).getClass().equals("java.lang.String"))) {
+            if (pos != 0) {
+                Curso c = (Curso) modelo.getElementAt(pos);
+            }
+        }
+
+
+    }//GEN-LAST:event_btGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

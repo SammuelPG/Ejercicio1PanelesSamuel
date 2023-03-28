@@ -6,6 +6,7 @@ package controlador;
 
 import encriptar.Encriptar;
 import java.util.ArrayList;
+import modelo.Alumno;
 import modelo.Asignatura;
 import modelo.Curso;
 import modelo.Usuario;
@@ -19,11 +20,13 @@ public class Empresa {
     ArrayList<Usuario> usuarios;
     ArrayList<Asignatura> asignaturas;
     ArrayList<Curso> cursos;
+    ArrayList<Alumno> alumnos;
 
     public Empresa() {
         usuarios = new ArrayList<>();
         asignaturas = new ArrayList<>();
         cursos = new ArrayList<>();
+        alumnos= new ArrayList<>();
     }
 
     public void anadirUsuarios(Usuario u) {
@@ -62,6 +65,10 @@ public class Empresa {
 
     public ArrayList<Asignatura> getAsignaturas() {
         return asignaturas;
+    }
+
+    public ArrayList<Curso> getCursos() {
+        return cursos;
     }
 
 }
