@@ -28,27 +28,28 @@ public class VntLogin extends javax.swing.JFrame {
         anadirUsu();
         anadirAsignaturas();
     }
-    
-    public VntLogin(Empresa empresa){
+
+    public VntLogin(Empresa empresa) {
         initComponents();
-        this.empresa=empresa;
+        this.empresa = empresa;
     }
 
     private void anadirUsu() {
         empresa.anadirUsuarios(new Usuario("mj", "202cb962ac59075b964b07152d234b70"));
         empresa.anadirUsuarios(new Usuario("a", "202cb962ac59075b964b07152d234b70"));
     }
-    
-    private void anadirAsignaturas(){
-        empresa.anadirAsignaturas(new Asignatura(1,"Programacion"));
-        empresa.anadirAsignaturas(new Asignatura(2,"Entornos"));
-        empresa.anadirAsignaturas(new Asignatura(3,"Bases de datos"));
-        empresa.anadirAsignaturas(new Asignatura(4,"Lenguaje de Marcas"));
+
+    private void anadirAsignaturas() {
+        empresa.anadirAsignaturas(new Asignatura(1, "Programacion"));
+        empresa.anadirAsignaturas(new Asignatura(2, "Entornos"));
+        empresa.anadirAsignaturas(new Asignatura(3, "Bases de datos"));
+        empresa.anadirAsignaturas(new Asignatura(4, "Lenguaje de Marcas"));
     }
-    
-    private void anadirCursos(){
-        empresa.anadirCursos(new Curso(1,"DAM"));
+
+    private void anadirCursos() {
+        empresa.anadirCursos(new Curso(1, "DAM"));
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

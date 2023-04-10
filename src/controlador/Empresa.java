@@ -26,7 +26,7 @@ public class Empresa {
         usuarios = new ArrayList<>();
         asignaturas = new ArrayList<>();
         cursos = new ArrayList<>();
-        alumnos= new ArrayList<>();
+        alumnos = new ArrayList<>();
     }
 
     public void anadirUsuarios(Usuario u) {
@@ -53,6 +53,19 @@ public class Empresa {
 
     public boolean exixsteCurso(int codigo) {
         return cursos.contains(new Curso(codigo));
+    }
+
+    public int exixsteAlumno(String dni) {
+        int posicion = alumnos.indexOf(new Alumno(dni));
+        return posicion;
+    }
+
+    public boolean exixsteAlumno2(String dni) {
+        return alumnos.contains(new Alumno(dni));
+    }
+
+    public void anadirAlumno(String dni, String nombre, Curso curso) {
+        alumnos.add(new Alumno(dni, nombre, curso));
     }
 
     public void anadirCurso(ArrayList<Asignatura> asignatura, int codigo, String denominacion) {

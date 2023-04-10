@@ -11,7 +11,7 @@ import controlador.Empresa;
  * @author dam
  */
 public class VntGestor extends javax.swing.JFrame {
-    
+
     Empresa empresa;
     AltaCurso altacurso;
     AltaAlu altaalumnos;
@@ -23,10 +23,10 @@ public class VntGestor extends javax.swing.JFrame {
     public VntGestor() {
         initComponents();
     }
-    
+
     public VntGestor(Empresa e) {
         initComponents();
-        empresa = e;        
+        empresa = e;
     }
 
     /**

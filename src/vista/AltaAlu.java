@@ -5,7 +5,9 @@
 package vista;
 
 import controlador.Empresa;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import modelo.Curso;
 
 /**
@@ -31,6 +33,10 @@ public class AltaAlu extends javax.swing.JPanel {
     private void cargarCursos() {
         modelo.addElement("Seleccione un curso");
         modelo.addAll(empresa.getCursos());
+        /*ArrayList<Curso> cursos = empresa.getCursos();
+        for (int i = 0; i < cursos.size(); i++) {
+            modelo.addElement(cursos.get(i));
+        }*/
     }
 
     /**
@@ -128,14 +134,39 @@ public class AltaAlu extends javax.swing.JPanel {
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         int pos = jcCursos.getSelectedIndex();
+        String dni = txtDNI.getText();
+        String nombre = txtNombre.getText();
         if (!(modelo.getElementAt(pos).getClass().equals("java.lang.String"))) {
             if (pos != 0) {
                 Curso c = (Curso) modelo.getElementAt(pos);
+                if (empresa.exixsteAlumno2(dni)) {
+                    JOptionPane.showMessageDialog(this, "Dni Existente", "Error", JOptionPane.ERROR_MESSAGE);
+                    txtDNI.setText("");
+                    txtDNI.requestFocus();
+                } else {
+                    if (nombre.trim().equals("")) {
+                        JOptionPane.showMessageDialog(this, "Campo requerido", "Error", JOptionPane.ERROR_MESSAGE);
+                        txtNombre.requestFocus();
+                    } else {
+                        empresa.anadirAlumno(dni, nombre, c);
+                        JOptionPane.showMessageDialog(this, "Alumno Grabado", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                        borrar();
+                    }
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Selecciona un curso","Error",JOptionPane.ERROR_MESSAGE);
+                jcCursos.requestFocus();
             }
         }
 
-
     }//GEN-LAST:event_btGuardarActionPerformed
+
+    private void borrar() {
+        txtDNI.setText("");
+        txtNombre.setText("");
+        jcCursos.setSelectedIndex(0);
+        txtDNI.requestFocus();
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -21,6 +21,10 @@ public class Alumno {
         this.matriculado = matriculado;
     }
 
+    public Alumno(String DNI) {
+        this.DNI = DNI;
+    }
+    
     public String getDNI() {
         return DNI;
     }

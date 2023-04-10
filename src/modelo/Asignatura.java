@@ -9,7 +9,7 @@ package modelo;
  * @author dam
  */
 public class Asignatura {
-    
+
     private int codigo;
     private String nombre;
 
@@ -30,5 +30,5 @@ public class Asignatura {
     public String toString() {
         return nombre;
     }
-    
+
 }

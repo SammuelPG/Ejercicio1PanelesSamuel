@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author dam
  */
 public class Curso {
+
     ArrayList<Asignatura> asignatura;
     private int codigo;
     private String denominacion;
@@ -83,6 +84,5 @@ public class Curso {
     public String toString() {
         return denominacion;
     }
-
 
 }
