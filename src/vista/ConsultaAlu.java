@@ -4,17 +4,32 @@
  */
 package vista;
 
+import controlador.Empresa;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Alumno;
+import modelo.Asignatura;
+
 /**
  *
  * @author dam
  */
 public class ConsultaAlu extends javax.swing.JPanel {
-
+    Empresa empresa;
+    DefaultTableModel modelo;
     /**
      * Creates new form ConsultaAlu
      */
-    public ConsultaAlu() {
+    public ConsultaAlu(Empresa empresa) {
         initComponents();
+        this.empresa = empresa;
+        modelo=new DefaultTableModel();
+        String [] titulos={"Codigo","Denominacion"};
+        modelo.setColumnIdentifiers(titulos);
+        tblAsignaturas.setModel(modelo);
     }
 
     /**
@@ -26,19 +41,127 @@ public class ConsultaAlu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtDNI = new javax.swing.JTextField();
+        lbNombre = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtCurso = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblAsignaturas = new javax.swing.JTable();
+
+        jLabel1.setText("CONSULTA ALUMNOS");
+
+        jLabel2.setText("DNI");
+
+        txtDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                teclaPulsada(evt);
+            }
+        });
+
+        lbNombre.setText("************************");
+
+        jLabel3.setText("CURSO");
+
+        txtCurso.setEditable(false);
+        txtCurso.setText("****************************************");
+
+        tblAsignaturas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblAsignaturas);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(35, 35, 35)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbNombre))
+                            .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel1)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbNombre))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(168, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void teclaPulsada(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_teclaPulsada
+        String dni;
+        int posicion;
+        Alumno a;
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            dni = txtDNI.getText().trim();
+            a = empresa.existeUnAlumno(dni);
+            if (a == null)
+            {
+                JOptionPane.showMessageDialog(this, "No existe ese alumno", "Error", JOptionPane.ERROR_MESSAGE);
+            } 
+            else {
+                lbNombre.setText(a.getNombre());
+                txtCurso.setText(a.getMatriculado().getDenominacion());
+                cargarAsingaturas(a.getMatriculado().getAsignatura());
+            }
+        }
+    }//GEN-LAST:event_teclaPulsada
+
+    private void cargarAsingaturas(ArrayList<Asignatura> asignatura) {
+        for (Asignatura a:asignatura) {
+            Vector v=new Vector();
+            v.add(a.getCodigo());
+            v.add(a.getNombre());
+            modelo.addRow(v);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbNombre;
+    private javax.swing.JTable tblAsignaturas;
+    private javax.swing.JTextField txtCurso;
+    private javax.swing.JTextField txtDNI;
     // End of variables declaration//GEN-END:variables
+
 }

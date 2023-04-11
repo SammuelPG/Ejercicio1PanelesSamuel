@@ -55,12 +55,12 @@ public class Empresa {
         return cursos.contains(new Curso(codigo));
     }
 
-    public int exixsteAlumno(String dni) {
+    public int existeAlumno(String dni) {
         int posicion = alumnos.indexOf(new Alumno(dni));
         return posicion;
     }
 
-    public boolean exixsteAlumno2(String dni) {
+    public boolean existeAlumno2(String dni) {
         return alumnos.contains(new Alumno(dni));
     }
 
@@ -82,6 +82,21 @@ public class Empresa {
 
     public ArrayList<Curso> getCursos() {
         return cursos;
+    }
+
+    public Alumno getUnAlumno(int pos) {
+        return alumnos.get(pos);
+    }
+
+    public Alumno existeUnAlumno(String dni) {
+        Alumno a = null;
+        int pos;
+       //pos = alumnos.indexOf(new Alumno(dni));
+        pos= existeAlumno(dni);
+        if (pos != -1) {
+            a = alumnos.get(pos);
+        }
+        return a;
     }
 
 }

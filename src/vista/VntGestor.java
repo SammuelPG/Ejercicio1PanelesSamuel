@@ -117,7 +117,7 @@ public class VntGestor extends javax.swing.JFrame {
 
     private void ConsultaAluActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaAluActionPerformed
         quitarPaneles();
-        consultaalu = new ConsultaAlu();
+        consultaalu = new ConsultaAlu(empresa);
         this.getContentPane().add(consultaalu);
         pack();
     }//GEN-LAST:event_ConsultaAluActionPerformed

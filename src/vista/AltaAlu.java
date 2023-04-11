@@ -139,7 +139,7 @@ public class AltaAlu extends javax.swing.JPanel {
         if (!(modelo.getElementAt(pos).getClass().equals("java.lang.String"))) {
             if (pos != 0) {
                 Curso c = (Curso) modelo.getElementAt(pos);
-                if (empresa.exixsteAlumno2(dni)) {
+                if (empresa.existeAlumno2(dni)) {
                     JOptionPane.showMessageDialog(this, "Dni Existente", "Error", JOptionPane.ERROR_MESSAGE);
                     txtDNI.setText("");
                     txtDNI.requestFocus();
@@ -158,7 +158,6 @@ public class AltaAlu extends javax.swing.JPanel {
                 jcCursos.requestFocus();
             }
         }
-
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void borrar() {
