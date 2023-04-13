@@ -9,9 +9,9 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import modelo.Alumno;
 import modelo.Asignatura;
+import modelo.Mimodelo;
 
 /**
  *
@@ -19,14 +19,14 @@ import modelo.Asignatura;
  */
 public class ConsultaAlu extends javax.swing.JPanel {
     Empresa empresa;
-    DefaultTableModel modelo;
+    Mimodelo modelo;
     /**
      * Creates new form ConsultaAlu
      */
     public ConsultaAlu(Empresa empresa) {
         initComponents();
         this.empresa = empresa;
-        modelo=new DefaultTableModel();
+        modelo=new Mimodelo();
         String [] titulos={"Codigo","Denominacion"};
         modelo.setColumnIdentifiers(titulos);
         tblAsignaturas.setModel(modelo);
@@ -144,6 +144,15 @@ public class ConsultaAlu extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_teclaPulsada
 
+    private void borrar(){
+    txtDNI.setText("");
+    lbNombre.setText("NOMBRE");
+    txtCurso.setText("");
+    int filast=modelo.getRowCount();
+        for (int i = 0; i < filast; i++) {
+           modelo.removeRow(0);
+        }
+    }
     private void cargarAsingaturas(ArrayList<Asignatura> asignatura) {
         for (Asignatura a:asignatura) {
             Vector v=new Vector();
